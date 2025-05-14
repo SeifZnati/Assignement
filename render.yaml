@@ -10,5 +10,26 @@ services:
         value: prod
       - key: JAVA_OPTS
         value: "-Xmx512m -Xms256m"
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: mysql
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: mysql
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: mysql
+          property: password
     healthCheckPath: /api/health
-    autoDeploy: true 
+    autoDeploy: true
+
+  - type: mysql
+    name: mysql
+    plan: free
+    ipAllowList: []
+    disk:
+      name: mysql-data
+      mountPath: /var/lib/mysql
+      sizeGB: 1 
