@@ -11,9 +11,7 @@ services:
       - key: JAVA_OPTS
         value: "-Xmx512m -Xms256m"
       - key: SPRING_DATASOURCE_URL
-        fromDatabase:
-          name: mysql
-          property: connectionString
+        value: jdbc:mysql://mysql:3306/defaultdb
       - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
           name: mysql
@@ -22,6 +20,10 @@ services:
         fromDatabase:
           name: mysql
           property: password
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: SPRING_JPA_SHOW_SQL
+        value: "true"
     healthCheckPath: /api/health
     autoDeploy: true
 
