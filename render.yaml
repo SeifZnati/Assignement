@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: your-app-name
+    env: docker
+    plan: free
+    buildCommand: docker build -t your-app-name .
+    startCommand: docker run -p 8080:8080 your-app-name
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: JAVA_OPTS
+        value: "-Xmx512m -Xms256m"
+    healthCheckPath: /api/health
+    autoDeploy: true 
